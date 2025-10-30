@@ -1,0 +1,147 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Visual Studio Code files
+.vscode
+.vs
+
+# PyCharm files
+.idea
+
+# Eclipse Project settings
+*.*project
+.settings
+
+# Sublime Text settings
+*.sublime-workspace
+*.sublime-project
+
+# Editor temporaries
+*.swn
+*.swo
+*.swp
+*.swm
+*~
+
+# IPython notebook checkpoints
+.ipynb_checkpoints
+
+# macOS dir files
+.DS_Store
+
+exp
+data
+raw_wav
+tensorboard
+**/*build*
+
+# Clangd files
+.cache
+compile_commands.json
+
+# train/inference files
+*.wav
+*.m4a
+*.aac
+*.pt
+pretrained_models/*
+*_pb2_grpc.py
+*_pb2.py
+*.tar
+
+pre_train/
+
+data/
+
+logs/
+
+checkpoints/
+outputs/
+outputs-new/
+outputs-nezha/
+outputs-sft/
+
+# 忽略所有 pycache 缓存目录
+__pycache__/
+
+*.py[cod]
+
+# 忽略虚拟环境
+venv/
+env/
+
+exp/
+
+# 忽略 IDE 文件
+.vscode/
+.idea/
+
+core.*
+
+#logs
+tensorboard/
+# === Python 相关 ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.so
+*.egg-info/
+.env
+.venv/
+
+# === 训练输出与缓存 ===
+logs/
+outputs/
+runs/
+checkpoints/
+wandb/
+*.log
+*.out
+*.err
+
+# === 模型与中间文件 ===
+*.pt
+*.ckpt
+*.pth
+*.bin
+*.npz
+*.npy
+*.onnx
+*.h5
+*.model
+
+# === 数据与结果 ===
+data/
+dataset/
+results/
+audio_samples/
+*.wav
+*.flac
+*.mp3
+*.jsonl
+*.csv
+
+ChatStyleScorer/
+
+# === 临时与系统文件 ===
+.DS_Store
+Thumbs.db
+.cache/
+.ipynb_checkpoints/
+*.bak
+*.tmp
+
+# === VSCode / IDE ===
+.vscode/
+.idea/
+
+# === 实验 / Colab / Notebook ===
+*.ipynb
+
+# === 编译或打包 ===
+build/
+dist/
+*.tar.gz
+*.zip

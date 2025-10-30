@@ -1,0 +1,6 @@
+[submodule "third_party/Matcha-TTS"]
+	path = third_party/Matcha-TTS
+	url = https://github.com/shivammehta25/Matcha-TTS.git
+[submodule "ChatScorer"]
+	path = ChatScorer
+	url = https://github.com/Brian4Sang/ChatScorer.git
