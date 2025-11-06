@@ -103,12 +103,6 @@ to  be continued ...
 
 ### Pass@K (Capability Upper Bound)
 **Pass@K** evaluates whether the model retains *any* valid solution path within its stochastic generation space.  
-Given a prompt \( x \), let \( o_1, \dots, o_K \) be \( K \) independent samples drawn from the model.  
-Pass@K is defined as:
-
-\[
-\text{Pass@}K = \mathbb{1}\left[\exists\, i \le K \ \text{s.t.}\ o_i \ \text{is correct} \right].
-\]
 
 This metric reflects the **upper-bound potential** of the model by checking the *existence* of at least one correct response.  
 A reduction in Pass@K indicates **mode collapse**, meaning that low-probability but high-quality solution modes have disappeared from the model's output space.
@@ -117,24 +111,7 @@ A reduction in Pass@K indicates **mode collapse**, meaning that low-probability 
 
 ### Failure@K (Stability Lower Bound)
 **Failure@K** measures the model's *worst-case reliability* by requiring all \( K \) generations to be correct.  
-For a prompt \( x \), with \( K \) sampled outputs \( o_1, \dots, o_K \), we define:
 
-\[
-\text{Failure@}K = 
-\mathbb{1}\left[\exists\, i \le K \ \text{s.t.}\ o_i \ \text{is incorrect}\right].
-\]
-
-Aggregated over a dataset of \( N \) prompts:
-
-\[
-\text{Failure@}K 
-= 1 - \frac{1}{N}
-\sum_{j=1}^{N}
-\mathbb{1}\left[
-\forall\, i \le K,\ 
-o_i^{(j)} \ \text{is correct}
-\right].
-\]
 
 This metric captures the **lower-bound performance** of the model, reflecting its **single-shot stability** and consistency under repeated generation.
 
