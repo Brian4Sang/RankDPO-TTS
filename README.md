@@ -102,7 +102,7 @@ gdown --id 1vJ8rrsYAJVnrMdqydK4fucl95v1QKAGW -O pretrained_models/RankDPO_ckpt.z
 unzip pretrained_models/RankDPO_ckpt.zip -d pretrained_models/
 ```
 
-**Note:** The code below is already included in `testsft.py`. You can run it directly to generate the demo audio.
+**Note:** The code below is already included in `testsft.py`. You can update few dirpath and directly to generate the demo audio.
 
 ```python
 import os
@@ -181,11 +181,22 @@ print(f"Merged audio saved to: {merged_path}")
 ```
 ## Results
 
-to  be continued ...
 <img src="./asset/fig3_chat_eval.png" width="250px">
+<img src="./asset/table2.png" width="250px">
+### Performance with ChatScorer
+
+By integrating **ChatScorer** into the RankDPO framework, our model achieves superior stability and naturalness:
+
+- **Drastic Stability Improvement:** Reduces stylistically unstable outputs significantly, dropping the **BadRate from 12.69% to 2.44%**.
+- **High Content Accuracy:** Maintains robust intelligibility with a negligible CER increase (remains < 1.5%).
+- **Better Human Alignment:** Subjective MOS ratings confirm that the model effectively suppresses unnatural prosody and aligns closely with human preferences.
 
 
 ## Evaluation Metrics
+
+Generative TTS models inherently exhibit stochastic behaviors, where output quality can vary significantly between runs. Traditional metrics (e.g., average MOS or CER) often focus on **average performance**, masking critical instability issues like occasional mumbling, screaming, or silence.
+
+To rigorously quantify the **robustness** and **consistency** of our model, we adopt two metrics inspired by code generation evaluation: **Pass@$K$** and **Failure@$K$**. These metrics allow us to assess not just the "best-case" quality, but the reliability of the model across multiple independent generations.
 
 ### Pass@K (Capability Upper Bound)
 **Pass@K** evaluates whether the model retains *any* valid solution path within its stochastic generation space.  
