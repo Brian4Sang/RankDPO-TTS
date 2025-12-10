@@ -56,15 +56,22 @@ and **ChatScorer**, a learned reward model designed to evaluate **style consiste
     sudo yum install sox sox-devel
     ```
 
-### Cosyvoice2 Model download
+### Model download
 
-We strongly recommend that you download their pretrained `CosyVoice2-0.5B` model and `CosyVoice-ttsfrd` resource.
+We strongly recommend that you download pretrained `CosyVoice2-0.5B` model as well as our trained model on it and `CosyVoice-ttsfrd` resource.
 
 ``` python
 # SDK模型下载
 from modelscope import snapshot_download
 snapshot_download('iic/CosyVoice2-0.5B', local_dir='pretrained_models/CosyVoice2-0.5B')
 snapshot_download('iic/CosyVoice-ttsfrd', local_dir='pretrained_models/CosyVoice-ttsfrd')
+
+pip install gdown
+# Download our trained RankDPO checkpoint
+gdown --id 1vJ8rrsYAJVnrMdqydK4fucl95v1QKAGW -O pretrained_models/RankDPO_ckpt.zip
+
+# Unzip the checkpoint
+unzip pretrained_models/RankDPO_ckpt.zip -d pretrained_models/
 ```
 
 ``` sh
@@ -73,6 +80,8 @@ mkdir -p pretrained_models
 git clone https://www.modelscope.cn/iic/CosyVoice2-0.5B.git pretrained_models/CosyVoice2-0.5B
 git clone https://www.modelscope.cn/iic/CosyVoice-ttsfrd.git pretrained_models/CosyVoice-ttsfrd
 ```
+
+
 
 Optionally, you can unzip `ttsfrd` resource and install `ttsfrd` package for better text normalization performance.
 
