@@ -49,7 +49,7 @@ gap_30ms = torch.zeros(1, int(0.03 * sr), dtype=torch.float32)
 merged_pieces = []
 
 for idx, (spk, text) in enumerate(dialogue):
-    # 和你原来的写法一样：直接从生成器里取 seg 保存
+   
     for seg_id, seg in enumerate(cosyvoice.inference_instruct_spk(text, spk, stream=False)):
         wav = seg['tts_speech']
         if spk == spk_a:
