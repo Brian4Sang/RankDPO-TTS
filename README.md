@@ -2,7 +2,7 @@
 Official implementation of the paper  
 **“Style-Aware RankDPO for Stable Speech Synthesis” (ICASSP 2026, under review)** 
 
-[Demos](https://fun-audio-llm.github.io); [Paper](https://funaudiollm.github.io/pdf/CosyVoice_v1.pdf); [Modelscope](https://www.modelscope.cn/studios/iic/CosyVoice-300M), 
+[Paper](https://funaudiollm.github.io/pdf/CosyVoice_v1.pdf); 
 
 these framework is used for post-SFT fine-tuning and implemented upon:
 
@@ -14,7 +14,7 @@ This repository provides the implementation of **RankDPO**, a listwise preferenc
 and **ChatScorer**, a learned reward model designed to evaluate **style consistency** and **natural conversational behavior** in TTS systems.
 
 <p align="center">
-  <img src="./asset/fig1_overall.png" width="700">
+  <img src="./asset/fig1_overall.png" width="500">
 </p>
 
 **Key ideas:**  
@@ -223,7 +223,7 @@ This metric captures the **lower-bound performance** of the model, reflecting it
 
 ## Acknowledge
 
-1. We borrowed a lot of code from [Cosyvoice].
+1. We borrowed a lot of code from [Cosyvoice](https://github.com/FunAudioLLM/CosyVoice.git).
 
 ## Disclaimer
 The content provided above is for academic purposes only and is intended to demonstrate technical capabilities. Some examples are sourced from the internet. If any content infringes on your rights, please contact us to request its removal.
