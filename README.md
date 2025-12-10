@@ -58,22 +58,14 @@ and **ChatScorer**, a learned reward model designed to evaluate **style consiste
 
 ### Model download
 
-We strongly recommend that you download pretrained `CosyVoice2-0.5B` model as well as our trained model on it and `CosyVoice-ttsfrd` resource.
+We strongly recommend that you download pretrained `CosyVoice2-0.5B` model and `CosyVoice-ttsfrd` resource.
 
 ``` python
 # SDK模型下载
 from modelscope import snapshot_download
 snapshot_download('iic/CosyVoice2-0.5B', local_dir='pretrained_models/CosyVoice2-0.5B')
 snapshot_download('iic/CosyVoice-ttsfrd', local_dir='pretrained_models/CosyVoice-ttsfrd')
-
-pip install gdown
-# Download our trained RankDPO checkpoint
-gdown --id 1vJ8rrsYAJVnrMdqydK4fucl95v1QKAGW -O pretrained_models/RankDPO_ckpt.zip
-
-# Unzip the checkpoint
-unzip pretrained_models/RankDPO_ckpt.zip -d pretrained_models/
 ```
-
 ``` sh
 # git模型下载，请确保已安装git lfs
 mkdir -p pretrained_models
@@ -96,11 +88,19 @@ pip install ttsfrd-0.4.2-cp310-cp310-linux_x86_64.whl
 
 ### Basic Usage
 
-### Basic Usage
 
 #### 1. Inference (Multi-turn Dialogue)
 
 Since our RankDPO model is fine-tuned on specific speaker embeddings (`tianqing` and `zhihao`), we recommend testing the model stability through a multi-turn dialogue generation script.
+
+```python
+pip install gdown
+# Download our trained RankDPO checkpoint (llm.pt and flow.pt)
+gdown --id 1vJ8rrsYAJVnrMdqydK4fucl95v1QKAGW -O pretrained_models/RankDPO_ckpt.zip
+
+# Unzip the checkpoint
+unzip pretrained_models/RankDPO_ckpt.zip -d pretrained_models/
+```
 
 **Note:** The code below is already included in `testsft.py`. You can run it directly to generate the demo audio.
 
