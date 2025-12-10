@@ -96,12 +96,89 @@ pip install ttsfrd-0.4.2-cp310-cp310-linux_x86_64.whl
 
 ### Basic Usage
 
-Follow the code below for detailed usage of each model.
+### Basic Usage
 
-``` python
-to be continued ...
+#### 1. Inference (Multi-turn Dialogue)
+
+Since our RankDPO model is fine-tuned on specific speaker embeddings (`tianqing` and `zhihao`), we recommend testing the model stability through a multi-turn dialogue generation script.
+
+**Note:** The code below is already included in `testsft.py`. You can run it directly to generate the demo audio.
+
+```python
+import os
+import time
+import torch
+import torchaudio
+import sys
+
+# Ensure third-party dependencies are in path if needed
+sys.path.append('third_party/Matcha-TTS') 
+from cosyvoice.cli.cosyvoice import CosyVoice2
+
+# 1. Load the Fine-tuned Model
+# [TODO: Change this path to your actual RankDPO checkpoint path]
+model_dir = 'pretrained_models/RankDPO_v1' 
+
+print(f"Loading RankDPO model from {model_dir}...")
+# We use CosyVoice2 wrapper as our base
+cosyvoice = CosyVoice2(
+    model_dir, 
+    load_jit=True, load_trt=True, load_vllm=False, fp16=True
+)
+
+# 2. Setup Output Directories
+output_root = 'outputs/dialogue_demo'
+spk_a = 'tianqing'  # Fine-tuned speaker A
+spk_b = 'zhihao'    # Fine-tuned speaker B
+
+dir_a = os.path.join(output_root, spk_a)
+dir_b = os.path.join(output_root, spk_b)
+dir_merged = os.path.join(output_root, "merged")
+os.makedirs(dir_a, exist_ok=True)
+os.makedirs(dir_b, exist_ok=True)
+os.makedirs(dir_merged, exist_ok=True)
+
+# 3. Define Dialogue Script
+dialogue = [
+    ("tianqing", "你有没有过这种感觉？去参加老同学的婚礼，音乐一响，新人走出来，心里除了祝福，还有种复杂的感受。"),
+    ("zhihao", "我太懂了。看着台上的新人，脑子里却闪回过去的画面。昨天还在宿舍里打游戏，今天就西装革履站在台上了。"),
+    ("tianqing", "对！婚礼不仅是新人新篇章的开始，也会让台下的我们感受到强烈的时间跨越。"),
+    ("zhihao", "没错，这种仪式感很容易触动人，让我们去审视自己走过的路，把过去和现在一下子连接起来。"),
+    # ... (Complete dialogue is in testsft.py)
+]
+
+# 4. Synthesis & Merge
+sr = cosyvoice.sample_rate
+gap_30ms = torch.zeros(1, int(0.03 * sr), dtype=torch.float32) # Silence gap
+merged_pieces = []
+
+print("Start inference...")
+for idx, (spk, text) in enumerate(dialogue):
+    # Use inference_instruct_spk for fine-tuned speakers
+    for seg_id, seg in enumerate(cosyvoice.inference_instruct_spk(text, spk, stream=False)):
+        wav = seg['tts_speech']
+        
+        # Save individual segments
+        if spk == spk_a:
+            out_path = os.path.join(dir_a, f"{idx:02d}_{spk}_{seg_id}.wav")
+        else:
+            out_path = os.path.join(dir_b, f"{idx:02d}_{spk}_{seg_id}.wav")
+        torchaudio.save(out_path, wav, sr)
+        
+        merged_pieces.append(wav)
+
+    # Add silence between turns
+    if idx != len(dialogue) - 1:
+        merged_pieces.append(gap_30ms)
+
+# 5. Save Final Merged Audio
+merged_wav = torch.cat(merged_pieces, dim=1)
+ts = time.strftime("%Y%m%d_%H%M%S")
+merged_path = os.path.join(dir_merged, f"dialogue_rankdpo_{ts}.wav")
+torchaudio.save(merged_path, merged_wav, sr)
+
+print(f"Merged audio saved to: {merged_path}")
 ```
-
 ## Results
 
 to  be continued ...
