@@ -182,9 +182,12 @@ print(f"Merged audio saved to: {merged_path}")
 ## Results
 
 <p align="center">
-  <img src="./asset/fig3_chat_eval.png" width="250px" />
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="./asset/table2.png" width="250px" />
+<p align="center">
+  <img src="./asset/fig3_chat_eval.png" width="250px">
+</p>
+
+<p align="center">
+  <img src="./asset/table2.png" width="250px">
 </p>
 
 By integrating **ChatScorer** into the RankDPO framework, our model achieves superior stability and naturalness:
