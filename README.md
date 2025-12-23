@@ -6,7 +6,7 @@ Official implementation of the paper
 
 these framework is used for post-SFT fine-tuning and implemented upon:
 
-**CosyVoice 2.0**: [Paper](https://arxiv.org/abs/2412.10117); [Modelscope](https://www.modelscope.cn/studios/iic/CosyVoice2-0.5B); [HuggingFace](https://huggingface.co/spaces/FunAudioLLM/CosyVoice2-0.5B)
+**CosyVoice 2.0**: [Paper](https://arxiv.org/abs/2412.10117)
 
 ## Overview
 
@@ -195,6 +195,32 @@ By integrating **ChatScorer** into the RankDPO framework, our model achieves sup
 - **Drastic Stability Improvement:** Reduces stylistically unstable outputs significantly, dropping the **BadRate from 12.69% to 2.44%**.
 - **High Content Accuracy:** Maintains robust intelligibility with a negligible CER increase (remains < 1.5%).
 - **Better Human Alignment:** Subjective MOS ratings confirm that the model effectively suppresses unnatural prosody and aligns closely with human preferences.
+
+## Qualitative Multi-turn Dialogue Examples
+
+To provide concrete perceptual evidence for the alignment between ChatScorer ranking
+and human subjective preference, we present several multi-turn dialogue examples.
+All examples are generated under the same dialogue prompts and speakers,
+but exhibit different conversational quality.
+
+For each dialogue, ChatScorer assigns a relative ranking based on conversational naturalness.
+Human listeners independently evaluated these dialogues using MOS-style preference judgment.
+As shown below, dialogues ranked higher by ChatScorer are consistently preferred by human listeners,
+while lower-ranked ones are perceived as more machine-like or less natural.
+
+The audio files are provided under `asset/audio_examples/`.
+
+| Dialogue ID | ChatScorer Judgment | Human MOS Preference | Audio |
+|------------|--------------------|----------------------|-------|
+| D001 | High-quality | 4.4 | [listen](./asset/audio_examples/rank3-null-csc-batch_9.wav) |
+| D002 | Low-quality  | 3.9 | [listen](./asset/audio_examples/sft-null-batch_9.wav) |
+| D003 | High-quality | 4.3 | [listen](./asset/audio_examples/rank3-null-csc-batch_5.wav) |
+| D004 | Low-quality  | 4.0 | [listen](./asset/audio_examples/sft-null-batch_5.wav) |
+
+These examples illustrate that ChatScorer effectively captures conversational quality
+that aligns well with human subjective judgment,
+particularly in multi-turn dialogue scenarios where instability accumulates over turns.
+
 
 
 ## Evaluation Metrics
