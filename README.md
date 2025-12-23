@@ -218,8 +218,23 @@ The audio files are provided under `asset/audio_examples/`.
 | D004 | Low-quality  | 4.0 | [listen](./asset/audio_examples/sft-null-batch_5.wav) |
 
 These examples illustrate that ChatScorer effectively captures conversational quality
-that aligns well with human subjective judgment,
-particularly in multi-turn dialogue scenarios where instability accumulates over turns.
+that aligns well with human subjective judgment, particularly in multi-turn dialogue.
+
+
+### Supplementary Check with Non-expert Listeners
+
+In addition to expert-based MOS evaluation, we conducted a small-scale supplementary check
+with non-expert listeners.
+Although not included as a formal metric, their subjective preferences on the same
+multi-turn dialogue examples were consistent with expert MOS judgments.
+
+| Model | expert-based MOS | non-expert-based MOS |
+|------------|--------------------|----------------------|
+| SFT | 4.0 | 3.7 | 
+| DPO | 4.1  | 4.1 | 
+| DPO-CSC | 4.3 | 4.1 |
+| RankDPO | 4.2  | 4.0 |
+| RankDPO-CSC | 4.4  | 4.3 |
 
 
 
